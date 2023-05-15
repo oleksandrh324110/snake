@@ -80,7 +80,7 @@ const update = () => {
 
   // food
   ctx.fillStyle = '#f00'
-  ctx.fillRect(food.x * boxSize, food.y * boxSize, boxSize, boxSize)
+  ctx.fillRect(food.x * boxSize, food.y * boxSize, boxSize - 1, boxSize - 1)
 
   //update
   setTimeout(() => {
