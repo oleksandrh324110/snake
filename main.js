@@ -5,8 +5,8 @@ const boxSize = 16
 
 const width = (canvas.width = window.innerWidth)
 const height = (canvas.height = window.innerHeight)
-const fieldWidth = width / boxSize
-const fieldHeight = height / boxSize
+const fieldWidth = Math.floor(width / boxSize - 1)
+const fieldHeight = Math.floor(height / boxSize - 1)
 
 const snake = [
   {
@@ -46,8 +46,11 @@ const update = () => {
   // logic
   pressedKey = key
 
-  if (snake.slice(3).find((el) => el.x === snake[0].x && el.y === snake[0].y))
+  if (snake.slice(3).find((el) => el.x === snake[0].x && el.y === snake[0].y)) {
     location.reload()
+    started = false
+    return
+  }
 
   if (key === 'w') snake.unshift({ x: snake[0].x, y: snake[0].y - 1 })
   else if (key === 'a') snake.unshift({ x: snake[0].x - 1, y: snake[0].y })
@@ -65,7 +68,7 @@ const update = () => {
   // snake
   ctx.fillStyle = '#0f0'
   for (let box of snake) {
-    ctx.fillRect(box.x * boxSize, box.y * boxSize, boxSize, boxSize)
+    ctx.fillRect(box.x * boxSize, box.y * boxSize, boxSize - 1, boxSize - 1)
   }
 
   // food
