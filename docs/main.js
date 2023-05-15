@@ -27,14 +27,21 @@ let delay = 100
 let started = false
 
 document.addEventListener('keydown', (e) => {
-  if (!~'wasd'.indexOf(e.key)) return
+  let boofKey
+
+  if (~[87, 38].indexOf(e.keyCode)) boofKey = 'w'
+  if (~[65, 37].indexOf(e.keyCode)) boofKey = 'a'
+  if (~[83, 40].indexOf(e.keyCode)) boofKey = 's'
+  if (~[68, 39].indexOf(e.keyCode)) boofKey = 'd'
+
+  if (!~'wasd'.indexOf(boofKey)) return
   if (started) {
-    if (Math.abs('wasd'.indexOf(e.key) - 'wasd'.indexOf(pressedKey)) === 2)
+    if (Math.abs('wasd'.indexOf(boofKey) - 'wasd'.indexOf(pressedKey)) === 2)
       return
-    key = e.key
+    key = boofKey
     return
   }
-  key = e.key
+  key = boofKey
   started = true
   requestAnimationFrame(update)
   return
